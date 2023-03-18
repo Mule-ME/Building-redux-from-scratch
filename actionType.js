@@ -4,7 +4,7 @@ const BUG_ADDED = "bugAdded";
 const BUG_RESOLVED = "bugResolved";
 const BUG_REMOVED = "bugRemoved";
 
-modules.exports = {
+module.exports = {
   BUG_ADDED,
   BUG_RESOLVED,
   BUG_REMOVED,
