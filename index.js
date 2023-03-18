@@ -9,7 +9,7 @@ store.subscribe(() => {
 });
 
 //checking our state
-console.log(store.getState(), "Initially");
+console.log(store.getState(), 'Initially our state is "undefined"');
 
 //Adding bug's (using dispatcher method from our store)
 store.dispatcher(bugAdded("Add bug function is ot working"));
