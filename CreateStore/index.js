@@ -1,10 +1,10 @@
 //Here we have to implement redux's createStore built in function on  our self with minimal scenario's
 
-function createStore(reducer) {
+function createStore(reducer, preloadedState) {
   //as we know redux's createStore() function accept reducer as a parameter to create a store
 
   //defining store state but we don't have to allow to access it directly because if we do that we make our state mutable directly from the store
-  let state;
+  let state = preloadedState;
 
   //Listeners is just an array of callback functions that fired if there is a state change while we dispatch actions, and if we subscribe to our store's
   const listeners = [];
@@ -29,6 +29,10 @@ function createStore(reducer) {
 
     //if we subscribed for our store, for every dispatched action we loop through our listener array and call tha callback from the array of listeners
     for (let i = 0; i < listeners.length; i++) listeners[i]();
+
+    //or we can use forEach method
+
+    //listeners.forEach(listener => listener())
   }
 
   //Subscriber's in redux are just a pure functions that accept listener's for each dispatched actions in our UI and give notice(log) for our UI.
@@ -36,6 +40,12 @@ function createStore(reducer) {
     //Subscribe method just accept a listeners w/h are a callback functions in witch we can do what ever we do with them mostly to log our state change &&
     //It will just push it to listener's array for every action's
     listeners.push(listener);
+
+    //function for Unsubscribing from our store
+    return function unsubscribe() {
+      const index = listeners.indexOf(listener);
+      listeners.splice(index, 1);
+    };
   }
 
   //create store will return an object which include the above methods to access through our store

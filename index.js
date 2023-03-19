@@ -4,7 +4,7 @@ const { bugAdded, bugResolved, bugRemoved } = require("./actions");
 const store = require("./store");
 
 //subscribe to our store to log state changes
-store.subscribe(() => {
+const unsubscribe = store.subscribe(() => {
   console.log("There is State changes");
 });
 
@@ -16,6 +16,9 @@ store.dispatcher(bugAdded("Add bug function is ot working"));
 store.dispatcher(bugAdded("The UI is not rendered"));
 store.dispatcher(bugAdded("Bug three"));
 store.dispatcher(bugAdded("Bug four"));
+
+//if we unsubscribe for our store we will not longer notified for our store change
+unsubscribe();
 
 //checking our state
 console.log(store.getState(), "Adding bug's");
